@@ -34,6 +34,7 @@ services:
       - DS_RO_PASS=${DATASTORE_READONLY_PASSWORD}
     volumes:
       - ckan_data:/srv/app/data
+      - "/mnt/harvest:/srv/app/data/harvest"
 
   ckan-harvest-gather:
     container_name: ckan-harvest-gather
@@ -60,6 +61,8 @@ services:
       - CKAN_MAX_UPLOAD_SIZE_MB=${CKAN_MAX_UPLOAD_SIZE_MB}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - DS_RO_PASS=${DATASTORE_READONLY_PASSWORD}
+    volumes:
+      - "/mnt/harvest:/srv/app/data/harvest"
 
   ckan-harvest-fetch:
     container_name: ckan-harvest-fetch
@@ -86,6 +89,8 @@ services:
       - CKAN_MAX_UPLOAD_SIZE_MB=${CKAN_MAX_UPLOAD_SIZE_MB}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - DS_RO_PASS=${DATASTORE_READONLY_PASSWORD}
+    volumes:
+      - "/mnt/harvest:/srv/app/data/harvest"
 
   ckan-harvest-run:
     container_name: ckan-harvest-run
@@ -93,31 +98,6 @@ services:
       context: .
       dockerfile: ckan/Dockerfile
     command: /bin/sh -c "while true; do sleep 900; ckan -c /srv/app/production.ini harvester run; done"
-    networks:
-      - frontend
-      - backend
-    depends_on:
-      - db
-      - ckan
-    env_file:
-      - ./.ckan-env
-    environment:
-      - CKAN_SQLALCHEMY_URL=postgresql://ckan:${POSTGRES_PASSWORD}@db/ckan
-      - CKAN_DATASTORE_WRITE_URL=postgresql://ckan:${POSTGRES_PASSWORD}@db/datastore
-      - CKAN_DATASTORE_READ_URL=postgresql://datastore_ro:${DATASTORE_READONLY_PASSWORD}@db/datastore
-      - CKAN_SOLR_URL=http://solr:8983/solr/ckan
-      - CKAN_REDIS_URL=redis://redis:6379/1
-      - CKAN_SITE_URL=${CKAN_SITE_URL}
-      - CKAN_MAX_UPLOAD_SIZE_MB=${CKAN_MAX_UPLOAD_SIZE_MB}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - DS_RO_PASS=${DATASTORE_READONLY_PASSWORD}
-
-  ckan-harvest-cleanlog:
-    container_name: ckan-harvest-cleanlog
-    build:
-      context: .
-      dockerfile: ckan/Dockerfile
-    command: /bin/sh -c "while true; do sleep 86400; ckan -c /srv/app/production.ini harvester clean_harvest_log; done"
     networks:
       - frontend
       - backend

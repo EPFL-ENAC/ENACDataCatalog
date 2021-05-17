@@ -11,7 +11,7 @@ ENV HARVEST_GIT_BRANCH=v1.3.1
 USER root
 
 # Install necessary packages to build extensions
-RUN apk add --no-cache \
+RUN apk add \
         gcc \
         g++ \
         libffi-dev \
@@ -29,10 +29,8 @@ RUN curl -o /wheels/harvest.txt https://raw.githubusercontent.com/ckan/ckanext-h
 RUN pip wheel --wheel-dir=/wheels git+https://github.com/NaturalHistoryMuseum/ckanext-ldap#egg=ckanext-ldap
 #RUN pip wheel --wheel-dir=/wheels git+https://github.com/ckan/ckanext-spatial#egg=ckanext-spatial
 
-ARG CACHEBUST=32
-RUN pip wheel --wheel-dir=/wheels git+https://github.com/Dolpic/ckanext-oaipmh#egg=ckanext-oaipmh
-
-RUN pip wheel --wheel-dir=/wheels git+https://github.com/Dolpic/ckanext-enac#egg=ckanext-enac
+ARG CACHEBUST=56
+RUN pip wheel --wheel-dir=/wheels git+https://github.com/EPFL-ENAC/CKAN_ext_localfolders#egg=ckanext-localfolders
 
 USER ckan
 
@@ -41,9 +39,7 @@ USER ckan
 ############
 FROM ghcr.io/keitaroinc/ckan:2.9.2
 
-LABEL maintainer="Keitaro Inc <info@keitaro.com>"
-
-ENV CKAN__PLUGINS envvars image_view text_view recline_view datastore datapusher harvest ckan_harvester ldap oaipmh_harvester enac_harvester 
+ENV CKAN__PLUGINS envvars image_view text_view recline_view datastore datapusher harvest ckan_harvester ldap oaipmh_harvester localfolders_harvester 
 #spatial_metadata spatial_query
 
 # Switch to the root user
@@ -53,14 +49,14 @@ COPY --from=extbuild /wheels /srv/app/ext_wheels
 
 # Install and enable the custom extensions
 
-RUN pip install -e git+https://github.com/Dolpic/ckanext-oaipmh#egg=ckanext-oaipmh --src /srv/app/src
+RUN pip install -e git+https://github.com/EPFL-ENAC/CKAN_ext_oaipmh#egg=ckanext-oaipmh --src /srv/app/src
 RUN pip install -r /srv/app/src/ckanext-oaipmh/requirements.txt
 
 RUN pip install --no-index --find-links=/srv/app/ext_wheels ckanext-harvest && \
     pip install --no-index --find-links=/srv/app/ext_wheels -r /srv/app/ext_wheels/harvest.txt && \
     pip install --no-index --find-links=/srv/app/ext_wheels ckanext-ldap && \
     #pip install --no-index --find-links=/srv/app/ext_wheels ckanext-spatial && \
-    pip install --no-index --find-links=/srv/app/ext_wheels ckanext-enac && \
+    pip install --no-index --find-links=/srv/app/ext_wheels ckanext-localfolders && \
     # Configure plugins
     ckan config-tool "${APP_DIR}/production.ini" "ckan.plugins = ${CKAN__PLUGINS}" && \
     ckan config-tool "${APP_DIR}/production.ini" "ckanext.ldap.uri = ldaps://ldap.epfl.ch" && \
