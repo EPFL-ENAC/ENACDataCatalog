@@ -24,15 +24,13 @@ a.text-info:focus {
   color: #692424 !important;
 }
 
-.bg-primary {
-  background-color: #822020 !important;
-}
 a.bg-primary:hover,
 a.bg-primary:focus {
   background-color: #591616 !important;
 }
 
-.btn-primary {
+.btn-primary,
+.bg-primary {
   background-color: #822020 !important; 
   background-color: #6e1b1b !important; 
 }
@@ -180,12 +178,9 @@ button.list-group-item-info.active:focus {
   background-color: #7a0000 !important;
 }
 
-.homepage .module-search .tags {
-  background-color: #470000 !important;
-}
-
+.homepage .module-search .tags,
 .account-masthead {
-  background: #470000 url("../../../base/images/bg.png") !important;
+  background-color: #470000 !important;
 }
 
 .account-masthead .account ul li {
@@ -232,7 +227,7 @@ button.list-group-item-info.active:focus {
 
 .site-footer,
 body {
-  background: #7a0000 url("../../../base/images/bg.png") !important;
+  background-color: #7a0000 !important;
 }
 
 .site-footer,

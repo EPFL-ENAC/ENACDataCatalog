@@ -68,7 +68,6 @@ RUN pip install --no-index --find-links=/srv/app/ext_wheels ckanext-harvest && \
 
     ckan config-tool "${APP_DIR}/production.ini" "ckan.site_title = ENAC data catalogue" && \
     ckan config-tool "${APP_DIR}/production.ini" "ckan.site_description = Unified data catalogue for the ENAC faculty" && \
-    ckan config-tool "${APP_DIR}/production.ini" "ckan.main_css = /base/css/enac.css" && \
     #ckan config-tool "${APP_DIR}/production.ini" "ckan.site_logo = /images/ckan_logo_fullname_long.png" && \
 
     chown -R ckan:ckan /srv/app
