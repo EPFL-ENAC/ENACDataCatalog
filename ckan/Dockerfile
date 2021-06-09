@@ -29,7 +29,7 @@ RUN curl -o /wheels/harvest.txt https://raw.githubusercontent.com/ckan/ckanext-h
 RUN pip wheel --wheel-dir=/wheels git+https://github.com/NaturalHistoryMuseum/ckanext-ldap#egg=ckanext-ldap
 #RUN pip wheel --wheel-dir=/wheels git+https://github.com/ckan/ckanext-spatial#egg=ckanext-spatial
 
-ARG CACHEBUST=66
+ARG CACHEBUST=73
 RUN pip wheel --wheel-dir=/wheels git+https://github.com/EPFL-ENAC/CKAN_ext_localfolders#egg=ckanext-localfolders
 
 USER ckan
@@ -39,7 +39,7 @@ USER ckan
 ############
 FROM ghcr.io/keitaroinc/ckan:2.9.2
 
-ENV CKAN__PLUGINS envvars image_view text_view recline_view datastore datapusher harvest ckan_harvester ldap oaipmh_harvester localfolders_harvester 
+ENV CKAN__PLUGINS envvars image_view text_view recline_view datastore datapusher harvest ckan_harvester ldap oaipmh_harvester localfolders_harvester enac_theme
 #spatial_metadata spatial_query
 
 # Switch to the root user
@@ -65,6 +65,12 @@ RUN pip install --no-index --find-links=/srv/app/ext_wheels ckanext-harvest && \
     ckan config-tool "${APP_DIR}/production.ini" "ckanext.ldap.email = mail" && \
     ckan config-tool "${APP_DIR}/production.ini" "ckanext.ldap.search.filter = uid={login}" && \
     ckan config-tool "${APP_DIR}/production.ini" "ckanext.ldap.ckan_fallback = true" && \
+
+    ckan config-tool "${APP_DIR}/production.ini" "ckan.site_title = ENAC data catalogue" && \
+    ckan config-tool "${APP_DIR}/production.ini" "ckan.site_description = Unified data catalogue for the ENAC faculty" && \
+    ckan config-tool "${APP_DIR}/production.ini" "ckan.main_css = /base/css/enac.css" && \
+    #ckan config-tool "${APP_DIR}/production.ini" "ckan.site_logo = /images/ckan_logo_fullname_long.png" && \
+
     chown -R ckan:ckan /srv/app
 
 # Remove wheels
@@ -72,6 +78,12 @@ RUN rm -rf /srv/app/ext_wheels
 
 # Add harvest afterinit script
 COPY ./afterinit.d/00_harvest.sh ${APP_DIR}/docker-afterinit.d/00_harvest.sh
+
+ARG CACHEBUST=3
+COPY ./ckan/ckanext-enac_theme/ ${APP_DIR}/src/ckan/ckanext-enac_theme/
+RUN cd /${APP_DIR}/src/ckan/ckanext-enac_theme/ && python setup.py develop
+
+#COPY ./ckan/home_layout.html ${APP_DIR}/src/ckan/ckan/templates/home/layout1.html
 
 # Switch to the ckan user
 USER ckan

@@ -1,0 +1,19 @@
+<div role="main">
+  <div class="main hero">
+    <div class="container">
+        <div class="home_searchbar">
+          {% block search %}
+            {% snippet 'home/snippets/search.html' %}
+          {% endblock %}
+        </div>
+        <div class="">
+          <div class="module-content box">
+            <div>
+                <h1 class="page-heading">{{ _("ENAC data catalogue") }}</h1>
+                <p>Unified data catalogue for the ENAC faculty</p>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
