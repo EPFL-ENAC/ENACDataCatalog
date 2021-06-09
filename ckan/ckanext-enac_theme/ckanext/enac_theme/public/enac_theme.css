@@ -2,7 +2,7 @@
 
 body{
   font-family: "SuisseIntl", Arial, sans-serif !important;
-  font-size: initial;
+  font-size: initial !important;
 }
 
 .home_searchbar{
@@ -21,8 +21,16 @@ body{
   padding: 0 !important;
 }
 
+.label{
+  background-color: #fff !important;
+  border: 1px solid gray !important;
+}
+
 a{
   color: #000000 !important;
+}
+a:hover{
+  background-color: rgba(255, 255, 255, 0) ! important;
 }
 
 a.text-primary:hover,
@@ -47,6 +55,7 @@ a.bg-primary:focus {
 .bg-primary {
   background-color: #ff0000 !important; 
   color:white !important;
+  border-color:none;
 }
 .btn-primary:focus,
 .btn-primary.focus,
@@ -54,7 +63,7 @@ a.bg-primary:focus {
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
-  background-color: #591616 !important;
+  background-color: #b51f1f !important;
 }
 
 .btn-primary.disabled:hover,
