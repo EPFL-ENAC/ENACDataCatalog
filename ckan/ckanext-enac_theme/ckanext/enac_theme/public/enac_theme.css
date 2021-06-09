@@ -2,6 +2,7 @@
 
 body{
   font-family: "SuisseIntl", Arial, sans-serif !important;
+  font-size: initial;
 }
 
 .home_searchbar{
@@ -14,6 +15,10 @@ body{
 
 .main{
   background-color: #ffffff !important;
+}
+
+.homepage [role="main"] {
+  padding: 0 !important;
 }
 
 a{
@@ -40,8 +45,8 @@ a.bg-primary:focus {
 
 .btn-primary,
 .bg-primary {
-  background-color: #822020 !important; 
-  background-color: #6e1b1b !important; 
+  background-color: #ff0000 !important; 
+  color:white !important;
 }
 .btn-primary:focus,
 .btn-primary.focus,
@@ -66,7 +71,7 @@ fieldset[disabled] .btn-primary.focus {
 }
 .btn-primary .badge,
 .btn-link {
-  color: #822020 !important;
+  color: #ff0000 !important;
 }
 
 .dropdown-menu > .active > a,
@@ -212,6 +217,7 @@ button.list-group-item-info.active:focus {
 
 .masthead {
   background-color: #ffffff !important;
+  border-bottom: 1px solid #d5d5d5;
 }
 
 .masthead .navigation .nav-pills li a:hover,
@@ -223,7 +229,10 @@ button.list-group-item-info.active:focus {
 .masthead .btn-navbar-btn:active,
 .masthead .btn-navbar-btn.active,
 .masthead .btn-navbar-btn.disabled,
-.masthead .btn-navbar-btn[disabled],
+.masthead .btn-navbar-btn[disabled]{
+  color: #ff0000 !important;
+}
+
 .site-footer .navigation .nav-pills li a:hover,
 .site-footer .navigation .nav-pills li a:focus,
 .site-footer .navigation .nav-pills li.active a,
@@ -241,8 +250,9 @@ button.list-group-item-info.active:focus {
 body {
   background-color: #ffffff !important;
 }
-.site-footer{
+.site-footer,
+.site-footer label, 
+.site-footer small{
   background-color: #e6e6e6 !important;
   color: #707070 !important;
 }
-
