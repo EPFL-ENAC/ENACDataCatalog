@@ -1,4 +1,4 @@
-@font-face { font-family: "SuisseIntl"; src: url("https://www.epfl.ch/fonts/SuisseIntl-Regular-WebS.woff2")}
+@font-face { font-family: "SuisseIntl"; src: url("/SuisseIntl-Regular-WebS.woff2")}
 
 body{
   font-family: "SuisseIntl", Arial, sans-serif !important;
@@ -17,7 +17,7 @@ body{
 }
 
 a{
-  color: #000000;
+  color: #000000 !important;
 }
 
 a.text-primary:hover,
@@ -211,7 +211,7 @@ button.list-group-item-info.active:focus {
 }
 
 .masthead {
-  background: #7a0000 url("../../../base/images/bg.png") !important;
+  background-color: #ffffff !important;
 }
 
 .masthead .navigation .nav-pills li a:hover,
@@ -238,15 +238,11 @@ button.list-group-item-info.active:focus {
   color: #ff0000 !important;
 }
 
-.site-footer,
 body {
-  background-color: #7a0000 !important;
+  background-color: #ffffff !important;
+}
+.site-footer{
+  background-color: #e6e6e6 !important;
+  color: #707070 !important;
 }
 
-.site-footer,
-.site-footer label,
-.site-footer small,
-.site-footer a,
-.attribution small  {
-  color: #e3cccc !important;
-}
