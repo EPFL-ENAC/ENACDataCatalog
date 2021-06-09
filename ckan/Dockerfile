@@ -68,6 +68,10 @@ RUN pip install --no-index --find-links=/srv/app/ext_wheels ckanext-harvest && \
 
     ckan config-tool "${APP_DIR}/production.ini" "ckan.site_title = ENAC data catalogue" && \
     ckan config-tool "${APP_DIR}/production.ini" "ckan.site_description = Unified data catalogue for the ENAC faculty" && \
+
+    ckan config-tool "${APP_DIR}/production.ini" "ckan.harvest.log_scope = 0" && \
+    ckan config-tool "${APP_DIR}/production.ini" "ckan.harvest.log_timeframe = 10" && \
+    ckan config-tool "${APP_DIR}/production.ini" "ckan.harvest.log_level = info" && \
     #ckan config-tool "${APP_DIR}/production.ini" "ckan.site_logo = /images/ckan_logo_fullname_long.png" && \
 
     chown -R ckan:ckan /srv/app

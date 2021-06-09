@@ -6,9 +6,8 @@
   min-height: 60vh !important;
 }
 
-a,
-.text-primary {
-  color: #e3cccc !important;
+a{
+  color: #822020;
 }
 
 a.text-primary:hover,
