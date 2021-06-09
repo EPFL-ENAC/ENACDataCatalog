@@ -29,7 +29,7 @@ RUN curl -o /wheels/harvest.txt https://raw.githubusercontent.com/ckan/ckanext-h
 RUN pip wheel --wheel-dir=/wheels git+https://github.com/NaturalHistoryMuseum/ckanext-ldap#egg=ckanext-ldap
 #RUN pip wheel --wheel-dir=/wheels git+https://github.com/ckan/ckanext-spatial#egg=ckanext-spatial
 
-ARG CACHEBUST=76
+ARG CACHEBUST=77
 RUN pip wheel --wheel-dir=/wheels git+https://github.com/EPFL-ENAC/CKAN_ext_localfolders#egg=ckanext-localfolders
 
 USER ckan
@@ -72,7 +72,7 @@ RUN pip install --no-index --find-links=/srv/app/ext_wheels ckanext-harvest && \
     ckan config-tool "${APP_DIR}/production.ini" "ckan.harvest.log_scope = 0" && \
     ckan config-tool "${APP_DIR}/production.ini" "ckan.harvest.log_timeframe = 10" && \
     ckan config-tool "${APP_DIR}/production.ini" "ckan.harvest.log_level = info" && \
-    #ckan config-tool "${APP_DIR}/production.ini" "ckan.site_logo = /images/ckan_logo_fullname_long.png" && \
+    ckan config-tool "${APP_DIR}/production.ini" "ckan.site_logo = https://inside.epfl.ch/wp/5.5/wp-content/themes/wp-theme-2018/assets/svg/epfl-logo.svg" && \
 
     chown -R ckan:ckan /srv/app
 

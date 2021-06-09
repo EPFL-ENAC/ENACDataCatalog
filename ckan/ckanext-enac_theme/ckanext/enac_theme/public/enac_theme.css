@@ -1,3 +1,9 @@
+@font-face { font-family: "SuisseIntl"; src: url("https://www.epfl.ch/fonts/SuisseIntl-Regular-WebS.woff2")}
+
+body{
+  font-family: "SuisseIntl", Arial, sans-serif !important;
+}
+
 .home_searchbar{
   margin:40px;
 }
@@ -6,8 +12,12 @@
   min-height: 60vh !important;
 }
 
+.main{
+  background-color: #ffffff !important;
+}
+
 a{
-  color: #822020;
+  color: #000000;
 }
 
 a.text-primary:hover,
@@ -177,9 +187,12 @@ button.list-group-item-info.active:focus {
   background-color: #7a0000 !important;
 }
 
-.homepage .module-search .tags,
-.account-masthead {
+.homepage .module-search .tags{
   background-color: #470000 !important;
+}
+
+.account-masthead{
+  background-color: #ffffff !important;
 }
 
 .account-masthead .account ul li {
@@ -221,7 +234,8 @@ button.list-group-item-info.active:focus {
 .site-footer .btn-navbar-btn.active,
 .site-footer .btn-navbar-btn.disabled,
 .site-footer .btn-navbar-btn[disabled] {
-  background-color: #470000 !important;
+  background-color: #e6e6e6 !important;
+  color: #ff0000 !important;
 }
 
 .site-footer,
