@@ -24,6 +24,7 @@ body{
 .label{
   background-color: #fff !important;
   border: 1px solid gray !important;
+  color: black !important;
 }
 
 a{
@@ -55,7 +56,7 @@ a.bg-primary:focus {
 .bg-primary {
   background-color: #ff0000 !important; 
   color:white !important;
-  border-color:none;
+  border-color:transparent !important;
 }
 .btn-primary:focus,
 .btn-primary.focus,
