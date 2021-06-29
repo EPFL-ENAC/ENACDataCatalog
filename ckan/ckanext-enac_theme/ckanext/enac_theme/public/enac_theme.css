@@ -2,11 +2,18 @@
 
 body{
   font-family: "SuisseIntl", Arial, sans-serif !important;
-  font-size: initial !important;
 }
 
 .home_searchbar{
   margin:40px;
+}
+
+.notes a{
+  text-decoration:underline;
+}
+
+.pill{
+  background-color: #ff0000 !important;
 }
 
 .hero{
@@ -87,6 +94,10 @@ fieldset[disabled] .btn-primary.focus {
 .btn-primary .badge,
 .btn-link {
   color: #ff0000 !important;
+}
+
+.nav-pills > li > a{
+  font-weight: 700 !important;
 }
 
 .dropdown-menu > .active > a,
@@ -216,10 +227,10 @@ button.list-group-item-info.active:focus {
 }
 
 .account-masthead .account ul li {
-  border-left: 1px solid #7e6b6b !important;
+  border-left: 1px solid #000000 !important;
 }
 .account-masthead .account ul li a {
-  color: #debfbf !important;
+  color: #000000 !important;
 }
 
 .account-masthead .account ul li a:hover {
@@ -246,6 +257,12 @@ button.list-group-item-info.active:focus {
 .masthead .btn-navbar-btn.disabled,
 .masthead .btn-navbar-btn[disabled]{
   color: #ff0000 !important;
+}
+
+.masthead .navigation .nav-pills li a:hover, 
+.masthead .navigation .nav-pills li a:focus, 
+.masthead .navigation .nav-pills li.active a {
+  background-color: #ffffff !important;
 }
 
 .site-footer .navigation .nav-pills li a:hover,
