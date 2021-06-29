@@ -9,7 +9,7 @@ body{
 }
 
 .notes a,
-.module-content a{
+.home_description a{
   text-decoration:underline;
 }
 
@@ -220,7 +220,7 @@ button.list-group-item-info.active:focus {
 .media-view:hover .banner,
 .media-view.hovered .banner,
 .homepage .module-search .module-content {
-  background-color: #7a0000 !important;
+  background-color: #fffbfb70 !important;
 }
 
 .homepage .module-search .tags{
