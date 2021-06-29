@@ -4,6 +4,10 @@ body{
   font-family: "SuisseIntl", Arial, sans-serif !important;
 }
 
+.heading{
+  color:black !important;
+}
+
 .home_searchbar{
   margin:40px;
 }
