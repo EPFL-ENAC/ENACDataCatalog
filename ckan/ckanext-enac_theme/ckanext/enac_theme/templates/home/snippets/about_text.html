@@ -1,3 +1,62 @@
 {% trans %}
-<p>Paragraphe About</p>
+
+<h2>How does this platform works ?</h2>
+<p>
+  ENAC data catalog regroups data used by the ENAC scientists in an unified page. 
+  This platform does not store any data itself but makes datasets available by harvesting their metadata from external sources.
+
+  The software is build using <a href="https://ckan.org/">CKAN</a>, an open source data management system.
+</p>
+
+
+
+<h2>Which datasets are available ?</h2>
+<p>Currently, the following datasets are harvested by the platform</p>
+<ul>
+  <li>
+    <a href="https://www.meteoswiss.admin.ch/home.html">MeteoSwiss</a><br>
+    <span>The following datasets coming from the Federal Office of Meteorology and Climatology are streamlined</span>
+    <ul>
+      <li>Albedo</li>
+      <li>Clear Sky Index</li>
+      <li>Precipitation</li>
+      <li>Radiation</li>
+      <li>Sunshine Duration</li>
+      <li>Temperature</li>
+    </ul>
+  </li>
+  <br>
+  <li>
+    <a href="https://infoscience.epfl.ch/">Infoscience</a>
+    <br>
+    <p>The EPFL Infoscience repository is harvested and all publications marked as ENAC and containing datasets are liked here</p>
+  </li>
+</ul>
+
+
+
+<h2>Is there an API ?</h2>
+<p>
+  Yes ! The base url is <a href="/api/3/">here</a> and all the functionalities are listed in the 
+  <a href="https://docs.ckan.org/en/2.9/api/">Official CKAN API documentation</a>
+</p>
+
+
+
+<h2>How to add a dataset ?</h2>
+<p>
+  If you want your dataset to be made available on this platform, it suffices to publish them on <a href="https://infoscience.epfl.ch/">Infoscience</a>.
+  It will be automatically harvested and will appear shortly. If this is not the case do not hesitate to contact us.
+</p>
+
+
+
+<h2>Contact</h2>
+<p>This tool is part of a student semester project aiming at improving data findability and accessibility at ENAC, focusing on data coming from MeteoSwiss.</p>
+<ul>
+  <li>Camille Ohlmann, camille.ohlmann@epfl.ch</li>
+  <li>Corentin Junod, corentin.junod@epfl.ch</li>
+</ul>
+
+
 {% endtrans %} 

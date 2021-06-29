@@ -8,7 +8,8 @@ body{
   margin:40px;
 }
 
-.notes a{
+.notes a,
+.module-content a{
   text-decoration:underline;
 }
 
@@ -36,7 +37,7 @@ body{
 }
 
 .navigation{
-  font-size: 1.5em;
+  font-size: 1.25em;
 }
 
 a{
@@ -62,6 +63,10 @@ a.text-info:focus {
 a.bg-primary:hover,
 a.bg-primary:focus {
   background-color: #591616 !important;
+}
+
+.account-masthead .account ul li a:hover{
+  color: #ff0000 !important;
 }
 
 .btn-primary,
@@ -227,7 +232,7 @@ button.list-group-item-info.active:focus {
 }
 
 .account-masthead .account ul li {
-  border-left: 1px solid #000000 !important;
+  border-left: 1px solid #ffffff !important;
 }
 .account-masthead .account ul li a {
   color: #000000 !important;
