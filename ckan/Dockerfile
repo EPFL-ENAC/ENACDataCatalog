@@ -29,7 +29,7 @@ RUN curl -o /wheels/harvest.txt https://raw.githubusercontent.com/ckan/ckanext-h
 RUN pip wheel --wheel-dir=/wheels git+https://github.com/NaturalHistoryMuseum/ckanext-ldap#egg=ckanext-ldap
 #RUN pip wheel --wheel-dir=/wheels git+https://github.com/ckan/ckanext-spatial#egg=ckanext-spatial
 
-ARG CACHEBUST=91
+ARG CACHEBUST=92
 RUN pip wheel --wheel-dir=/wheels git+https://github.com/EPFL-ENAC/CKAN_ext_localfolders#egg=ckanext-localfolders
 
 USER ckan
