@@ -18,6 +18,8 @@ services:
       - backend
     depends_on:
       - db
+    expose:
+      - 5000
     ports:
       - "0.0.0.0:${CKAN_PORT}:5000"
     env_file:
@@ -175,8 +177,8 @@ services:
   nginx:
     container_name: nginx
     build:
-      context: .
-      dockerfile: nginx/Dockerfile
+      context: nginx
+      dockerfile: Dockerfile
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
