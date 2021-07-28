@@ -4,7 +4,7 @@
 
 # General Settings
 CKAN_SITE_ID=default
-CKAN_SITE_URL=http://enacvm0046.xaas.epfl.ch:5000
+CKAN_SITE_URL=http://enac-ckan.epfl.ch:5000
 CKAN_PORT=5000
 CKAN_MAX_UPLOAD_SIZE_MB=100
 
