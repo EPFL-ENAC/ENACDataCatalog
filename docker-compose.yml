@@ -179,9 +179,11 @@ services:
     build:
       context: nginx
       dockerfile: Dockerfile
+    networks:
+      - frontend
     ports:
-      - "0.0.0.0:80:80"
-      - "0.0.0.0:443:443"
+    - "0.0.0.0:80:80"
+    - "0.0.0.0:443:443"
 
 networks:
   frontend:
