@@ -172,6 +172,15 @@ services:
     networks:
       - backend
 
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
+
 networks:
   frontend:
   backend:
