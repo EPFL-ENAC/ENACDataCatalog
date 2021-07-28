@@ -1,5 +1,5 @@
 # docker-compose build && docker-compose up -d
-version: "3"
+version: "3.2"
 
 volumes:
   ckan_data:
@@ -182,8 +182,13 @@ services:
     networks:
       - frontend
     ports:
-    - "0.0.0.0:80:80"
-    - "0.0.0.0:443:443"
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
+    volumes:
+      - type: bind
+        source: /etc/ssl
+        target: /etc/ssl
+        read_only: true
 
 networks:
   frontend:
