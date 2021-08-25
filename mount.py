@@ -6,20 +6,30 @@ enac_password = ""
 geodata_username = "geodata-admin"
 geodata_password = ""
 
+def mount_if_unmounted(source, target, username, domain, password):
+    os.system(f"""if grep -qs '{target} ' /proc/mounts; then
+        echo \"Already mounted: {target}\"
+    else
+        mount -v -t cifs \"{source}\" -o username={username},password={password},domain={domain},iocharset=utf8 \"{target}\"
+    fi""")
+
 def connect_enac1files():
   source = "//enac1files.epfl.ch/proj-meteosuisse"
   target = "/mnt/harvest/meteosuisse/Precipitation/CombiPrecip/data"
-  os.system(f"mount -v -t cifs \"{source}\" -o username={enac_username},password={enac_password},domain=intranet,iocharset=utf8,sec=ntlmv2,vers=1.0 \"{target}\" ")
+  #os.system(f"mount -v -t cifs \"{source}\" -o username={enac_username},password={enac_password},domain=intranet,iocharset=utf8,sec=ntlmv2,vers=1.0 \"{target}\" ")
+  mount_if_unmounted(source, target, enac_username, "intranet", enac_password)
 
 def connect_enac2netsvc1():
   source = "//enac2netsvc1.epfl.ch/meteosuisse/"
   target = "/mnt/harvest/meteosuisse/RprelimD/data"
-  os.system(f"mount -v -t cifs \"{source}\" -o username={enac_username},password={enac_password},domain=intranet,iocharset=utf8,sec=ntlmv2 \"{target}\" ")
+  #os.system(f"mount -v -t cifs \"{source}\" -o username={enac_username},password={enac_password},domain=intranet,iocharset=utf8,sec=ntlmv2 \"{target}\" ")
+  mount_if_unmounted(source, target, enac_username, "intranet", enac_password)
 
 def connect_geodata(source, target):
   source = "//enacit1vm02.epfl.ch/geodata/MeteoSwiss/" + source + "/"
-  target = "/mnt/harvest/meteosuisse/" + target + "/data/" 
-  os.system(f"mount -v -t cifs \"{source}\" -o username={geodata_username},password={geodata_password},domain=intranet,iocharset=utf8,sec=ntlmv2 \"{target}\" ")
+  target = "/mnt/harvest/meteosuisse/" + target + "/data"
+  #os.system(f"mount -v -t cifs \"{source}\" -o username={geodata_username},password={geodata_password},domain=intranet,iocharset=utf8,sec=ntlmv2 \"{target}\" ")
+  mount_if_unmounted(source, target, geodata_username, "enacit2vm02", geodata_password)
 
 connect_enac1files()
 connect_enac2netsvc1()
