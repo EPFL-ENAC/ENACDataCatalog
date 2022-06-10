@@ -45,6 +45,8 @@ ENV CKAN__PLUGINS envvars image_view text_view recline_view datastore datapusher
 # Switch to the root user
 USER root
 
+RUN apk add libgcc
+
 COPY --from=extbuild /wheels /srv/app/ext_wheels
 
 # Install and enable the custom extensions
