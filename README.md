@@ -63,9 +63,13 @@ Probably a list of things we want for the CKAN ENAC DATA CATALOG
 ### mount.py and Makefile
 You need to update credentials via Env variable if the ./mount.py allow it or directly on the machine by using the password found in the keeweb
 #### Mounting the files
+You need to create the file path before mounting the enac drives
+
 
 ```bash
-/mnt/harvest/meteosuisse/Precipitation/CombiPrecip/data
+## example of script to generate the directory in /mnt/harvest for example
+## DO NOT COPY PASTE BEFORE READING
+echo '/mnt/harvest/meteosuisse/Precipitation/CombiPrecip/data
 /mnt/harvest/meteosuisse/RprelimD/data
 /mnt/harvest/meteosuisse/Albedo/data
 /mnt/harvest/meteosuisse/Clear_Sky_Index/data
@@ -89,7 +93,7 @@ You need to update credentials via Env variable if the ./mount.py allow it or di
 /mnt/harvest/meteosuisse/Temperature/TabsY/data
 /mnt/harvest/meteosuisse/Temperature/TminD/data
 /mnt/harvest/meteosuisse/Temperature/TminM/data
-/mnt/harvest/meteosuisse/Temperature/TminY/data
+/mnt/harvest/meteosuisse/Temperature/TminY/data' | sed 's/\/mnt\/harvest\///' | xargs -I {} mkdir -p {}
 ```
 #### Firewall
 - To be allowed to mount the drives you'll need to create the /mnt directories
