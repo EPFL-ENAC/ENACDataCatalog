@@ -1,2 +1,3 @@
 #!/bin/bash
-docker-compose build --no-cache 
+docker-compose build --build-arg CACHEBUST=$(date +%s)
+
