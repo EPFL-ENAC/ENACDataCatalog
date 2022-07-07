@@ -52,9 +52,9 @@ Probably a list of things we want for the CKAN ENAC DATA CATALOG
 ## Machine setup
 
 ### SSH and certificates
-- Right now the certificates were copied by hand from enacvm0046.xaas.epfl.ch:/etc/ssl to enacvm0096.xaas.epfl.ch:/etc/ssl
+- The certificates are handled by the enacit-ansible repo
     - It should be done and referenced in the enacit-ansible repo
-    - have a look at how it was setup: https://github.com/EPFL-ENAC/enacit-srv-lin-sysadmin/tree/develop/prod/enac-ckan#2021-07-27--ssl-certificate--request
+    - have a look at how it was setup: https://github.com/EPFL-ENAC/enacit-srv-lin-sysadmin/tree/develop/prod/enac-ckan#2021-07-27--ssl-certificate--request before enacit-ansible
 
 ### Password
 - The passwords are stored inside our enac keeweb under the keywords: 'ckan-datacatalog *'
@@ -62,9 +62,16 @@ Probably a list of things we want for the CKAN ENAC DATA CATALOG
 
 ### mount.py and Makefile
 You need to update credentials via Env variable if the ./mount.py allow it or directly on the machine by using the password found in the keeweb
+
 #### Mounting the files
 You need to create the file path before mounting the enac drives
 
+```bash
+mkdir -p /mnt/harvest/meteosuisse/;
+# if you are in /opt//opt/ENACDataCatalog
+rsync -chavzP --stats meteosuisse/* /mnt/harvest/meteosuisse/
+
+```
 
 ```bash
 ## example of script to generate the directory in /mnt/harvest for example
@@ -129,7 +136,22 @@ umount script
 - To be allowed to mount the drives you'll need to create the /mnt directories
     - If you have errors by running python3 /opt/.../mount.py you may save the error output by doing so: `python3 mount.py 2> test.txt` and then create the directory by running something like: `cat test.txt  | grep /mnt | awk '{print $4}' | sed 's/://gi' | ^Crgs -I {} mkdir -p {}`; it should be faster than creating all those directories by hand
 - And be allowed in the firewall to access the enacit drives (ask an enac admin to allow your machine to access those enacit vm)
+- Verify that you have port 8443 open in the firewall for apache2 and 80/443 for the service web
+- Allow Samba / maybe not useful check with an admin
 
+
+#### TEQUILA
+
+- Since circa 2022, we need to ask 1234@epfl.ch for access to tequila server from a server
+```
+# If when you do a wget on this url you have a 403, then you should ask access for your new machine
+root@enacvm0096:~# wget -O - https://tequila.epfl.ch/cgi-bin/tequila/createrequest?urlaccess=test [https://tequila.epfl.ch/cgi-bin/tequila/createrequest?urlaccess=test]
+--2022-07-05 14:13:06--  https://tequila.epfl.ch/cgi-bin/tequila/createrequest?urlaccess=test [https://tequila.epfl.ch/cgi-bin/tequila/createrequest?urlaccess=test]
+Resolving tequila.epfl.ch [http://tequila.epfl.ch] (tequila.epfl.ch [http://tequila.epfl.ch])... 128.178.222.94
+Connecting to tequila.epfl.ch [http://tequila.epfl.ch] (tequila.epfl.ch [http://tequila.epfl.ch])|128.178.222.94|:443... connected.
+HTTP request sent, awaiting response... 403 You are not allowed to authenticate on this Tequila server
+2022-07-05 14:13:06 ERROR 403: You are not allowed to authenticate on this Tequila server.
+```
 
 ## TODO
 Side note: not sure if it's still necessary (it was present in and old TODO.md)
@@ -138,7 +160,7 @@ Please remove side note when we're sure. And transform those in github ISSUE at 
 - [ ] Dockerise the apache with tequila process present if we really need the swiss topo files : https://github.com/EPFL-ENAC/enacit-srv-lin-sysadmin/tree/develop/prod/enac-ckan#2021-08-23--tequila
     - cf this commit to see how the apache server was accessed by the plugin: 
         https://github.com/EPFL-ENAC/CKAN_ext_localfolders/commit/64f6d6fe9a04e51a33e02e8d7d1742db7a8c1303
-    - For information the swiss topo files were access via: https://epflgeodata.epfl.ch/ before geovite existed, and it needed epfl tequila login. But now the data is open at https://www.swisstopo.admin.ch/fr/geodata/maps.html a priori, so it's maybe not needed anymore.
+- [ ] For information the swiss topo files were access via: https://epflgeodata.epfl.ch/ before geovite existed, and it needed epfl tequila login. But now the data is open at https://www.swisstopo.admin.ch/fr/geodata/maps.html a priori, so it's maybe not needed anymore.
 - [ ] Activate group and other option in the oaipmh harvester
 - [ ] OAI-PMH : Remove the need to have a 'harvest' user
 

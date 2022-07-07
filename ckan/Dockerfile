@@ -76,8 +76,8 @@ RUN pip install --no-index --find-links=/srv/app/ext_wheels ckanext-harvest && \
     ckan config-tool "${APP_DIR}/production.ini" "ckan.harvest.log_level = info" && \
     ckan config-tool "${APP_DIR}/production.ini" "ckan.site_logo = https://inside.epfl.ch/wp/5.5/wp-content/themes/wp-theme-2018/assets/svg/epfl-logo.svg" && \
 
-    ckan config-tool "${APP_DIR}/production.ini" "ckan.devserver.ssl_cert = /etc/ssl/certs/enacvm0046.epfl.ch_2021-07-27.crt.pem" && \
-    ckan config-tool "${APP_DIR}/production.ini" "ckan.devserver.ssl_key = /etc/ssl/private/enacvm0046_2021-07-27.key" && \
+    ckan config-tool "${APP_DIR}/production.ini" "ckan.devserver.ssl_cert = /etc/ssl/enac-ckan.epfl.ch.crt.pem" && \
+    ckan config-tool "${APP_DIR}/production.ini" "ckan.devserver.ssl_key = /etc/ssl/enac-ckan.epfl.ch.key" && \
 
     chown -R ckan:ckan /srv/app
 
