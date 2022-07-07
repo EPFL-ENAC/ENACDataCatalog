@@ -43,6 +43,7 @@ Probably a list of things we want for the CKAN ENAC DATA CATALOG
     - extansion of CKAN Harvester plugin that mount
         base_url = '/srv/app/data/harvest/' from /mnt/harvest on the machine
 
+
 ## Scripts / API FEED
 - data-catalog-data-loading
     - Created by regis.longchamp@epfl.ch to automate populating ckan metadata via the API
@@ -68,7 +69,7 @@ You need to create the file path before mounting the enac drives
 
 ```bash
 mkdir -p /mnt/harvest/meteosuisse/;
-# if you are in /opt//opt/ENACDataCatalog
+# if you are in /opt/ENACDataCatalog else you should find a way to copy/move the meteosuisse data templates (json/md/pdf/png..)
 rsync -chavzP --stats meteosuisse/* /mnt/harvest/meteosuisse/
 
 ```
@@ -152,6 +153,39 @@ Connecting to tequila.epfl.ch [http://tequila.epfl.ch] (tequila.epfl.ch [http://
 HTTP request sent, awaiting response... 403 You are not allowed to authenticate on this Tequila server
 2022-07-05 14:13:06 ERROR 403: You are not allowed to authenticate on this Tequila server.
 ```
+
+## Harvest datasets from meteosuisse and  infoscience
+- Go to https://enac-ckan.epfl.ch/harvest
+- Create two harvest source
+1) metosuisse
+url: meteosuisse
+Title: MétéoSuisse data (url: enac-ckan.epfl.ch/harvest/enac-ckan-epfl-ch-harvest-meteosuisse)
+Description:
+source type: LocalFolders
+Update frequency: daily
+Configuration:
+Organization: meteosuisse (you'll need to create the organization prior to the harvest)
+
+
+2) infoscience
+url: https://infoscience.epfl.ch/oai2d
+Title: Infoscience_ENAC_Datasets (url: enac-ckan.epfl.ch/harvest/infoscience_enac_datasets)
+Description:
+source type: OAI-PMH  Harvester
+Update frequency: daily
+Configuration:
+```
+{
+ "set": "ENAC_datasets",
+ "metadata_prefix": "oai_dc"
+}
+```
+Organization: infoscience (you'll need to create the organization prior to the harvest)
+
+### Side note
+- Sometimes the harvest job gets stuck for meteosuisse (due to samba stalling or something else)
+- You'll have to rebuild the docker ckan if you want to update the templates in /meteosuisse
+- Usually if you run a newly build ckan docker image, you'll need to stop and start the harvest to avoid bad templates to be fed.
 
 ## TODO
 Side note: not sure if it's still necessary (it was present in and old TODO.md)
