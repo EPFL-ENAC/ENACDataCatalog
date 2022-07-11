@@ -50,13 +50,33 @@ Probably a list of things we want for the CKAN ENAC DATA CATALOG
     - https://github.com/EPFL-ENAC/enac-data-catalog-data-loading
     - The repository gathers a bunch of code to reference new data into the ckan data management system.
 
+
+## New setup
+Just run `ansible-playbook -v -i inventory/enac-ckan.epfl.ch.yml  playbooks/deploy-app.yml` in the repo enacit-ansible 
+- The certificates are handled by the enacit-ansible repo
+    - It should be done and referenced in the enacit-ansible repo
+- don't forget to add a deploy key:
+```
+Authorize cloning from the vm by adding a 'deploy-key' in the github setting of this repository
+the 'deploy-key' is the public key of the machine created by the provisioning it is needed when the repo is private
+```
+
+### ansible is stuck ?
+If ansible is stuck at the gather information stage, you may try running the following command.
+```
+ANSIBLE_DEBUG=1 ansible-playbook -vvvvv -i inventory/enac-ckan.epfl.ch.yml  playbooks/dump_vars.yml
+```
+
+- it usually is only this dataset that pauses problem, so just unmount -l it:
+    umount -l /mnt/harvest/meteosuisse/Precipitation/CombiPrecip/data
+- you'll need to stop the harvest process before though. remount it and then relaunch the process harvest
+
+
 ## Machine setup
 
 ### SSH and certificates
-- The certificates are handled by the enacit-ansible repo
-    - It should be done and referenced in the enacit-ansible repo
     - have a look at how it was setup: https://github.com/EPFL-ENAC/enacit-srv-lin-sysadmin/tree/develop/prod/enac-ckan#2021-07-27--ssl-certificate--request before enacit-ansible
-
+## Deprecated setup
 ### Password
 - The passwords are stored inside our enac keeweb under the keywords: 'ckan-datacatalog *'
 - For the interface login/password are under 'ckan-datacatalog ui credentials'
