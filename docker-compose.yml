@@ -18,6 +18,8 @@ services:
       - backend
     depends_on:
       - db
+      - solr
+      - redis
     expose:
       - 5000
     ports:
