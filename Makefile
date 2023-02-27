@@ -1,5 +1,17 @@
-setup:
-	./ensure-path.sh; python3 mount.py
+SHELL=bash
+PHONY=.env-export
+ifneq (,$(wildcard ./.env))
+    include .env
+    export
+endif
+
+include .env
+$(eval export $(shell sed -ne 's/ *#.*$$//; /./ s/=.*$$// p' .env))
+
+
+setup: 
+	 ./ensure-path.sh && python3 mount.py
+
 run:
 	docker-compose pull
 	docker-compose build --parallel --no-cache
