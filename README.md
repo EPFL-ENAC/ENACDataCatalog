@@ -1,5 +1,9 @@
 # ENAC DATA CATALOG - CKAN
 
+## TODO:
+--> setup script should create data directories
+--> apache server should be up and running
+
 Ckan is automatically started with ckan.service
 
 To manually (re)start it:
@@ -155,7 +159,7 @@ umount script
 ```
 #### Firewall
 - To be allowed to mount the drives you'll need to create the /mnt directories
-    - If you have errors by running python3 /opt/.../mount.py you may save the error output by doing so: `python3 mount.py 2> test.txt` and then create the directory by running something like: `cat test.txt  | grep /mnt | awk '{print $4}' | sed 's/://gi' | ^Crgs -I {} mkdir -p {}`; it should be faster than creating all those directories by hand
+    - If you have errors by running python3 /opt/.../mount.py you may save the error output by doing so: `python3 mount.py 2> test.txt` and then create the directory by running something like: `cat test.txt  | grep /mnt | awk '{print $4}' | sed 's/://gi' | xargs -I {} mkdir -p {}`; it should be faster than creating all those directories by hand
 - And be allowed in the firewall to access the enacit drives (ask an enac admin to allow your machine to access those enacit vm)
 - Verify that you have port 8443 open in the firewall for apache2 and 80/443 for the service web (usually done via enacit-ansible repo)
     - https://github.com/EPFL-ENAC/enacit-ansible/blob/main/inventory/enac-ckan.epfl.ch.yml#L12

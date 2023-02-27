@@ -1,5 +1,5 @@
 setup:
-	python3 mount.py
+	./ensure-path.sh; python3 mount.py
 run:
 	docker-compose pull
 	docker-compose build --parallel --no-cache
