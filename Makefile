@@ -1,6 +1,9 @@
+setup:
+	python3 mount.py
 run:
-	python3 /opt/ENACDataCatalog/mount.py
-	cd /opt/ENACDataCatalog; docker-compose build && docker-compose up -d
+	docker-compose pull
+	docker-compose build --parallel --no-cache
+	docker-compose up -d --remove-orphans
 
 build:
 	bash rebuild.sh

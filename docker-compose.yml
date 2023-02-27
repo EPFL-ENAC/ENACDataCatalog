@@ -123,6 +123,7 @@ services:
 
   datapusher:
     container_name: datapusher
+    platform: linux/amd64
     image: ghcr.io/keitaroinc/datapusher:${DATAPUSHER_VERSION}
     networks:
       - frontend
